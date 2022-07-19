@@ -24,7 +24,7 @@ namespace BaGet
         public const string CorsPolicy = "AllowAll";
 
         private static readonly HashSet<string> ValidDatabaseTypes
-            = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            = new(StringComparer.OrdinalIgnoreCase)
             {
                 "AzureTable",
                 "MySql",
@@ -34,7 +34,7 @@ namespace BaGet
             };
 
         private static readonly HashSet<string> ValidStorageTypes
-            = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            = new(StringComparer.OrdinalIgnoreCase)
             {
                 "AliyunOss",
                 "AwsS3",
@@ -45,7 +45,7 @@ namespace BaGet
             };
 
         private static readonly HashSet<string> ValidSearchTypes
-            = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            = new(StringComparer.OrdinalIgnoreCase)
             {
                 "AzureSearch",
                 "Database",

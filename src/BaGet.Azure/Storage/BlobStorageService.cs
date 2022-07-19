@@ -3,8 +3,8 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using BaGet.Core;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Blob;
+using Microsoft.Azure.Storage;
+using Microsoft.Azure.Storage.Blob;
 
 namespace BaGet.Azure
 {
@@ -65,13 +65,11 @@ namespace BaGet.Azure
             }
             catch (StorageException e) when (e.IsAlreadyExistsException())
             {
-                using (var targetStream = await blob.OpenReadAsync(cancellationToken))
-                {
-                    content.Position = 0;
-                    return content.Matches(targetStream)
-                        ? StoragePutResult.AlreadyExists
-                        : StoragePutResult.Conflict;
-                }
+                using var targetStream = await blob.OpenReadAsync(cancellationToken);
+                content.Position = 0;
+                return content.Matches(targetStream)
+                    ? StoragePutResult.AlreadyExists
+                    : StoragePutResult.Conflict;
             }
         }
 
